@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Kód </title>
+
+    <!-- Highlight.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+
+    <!-- Highlight.js JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        pre {
+            padding: 15px;
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+<h2>C++ Kód TREEDEGREE - Degree of a Tree</h2>
+
+<pre><code class="language-cpp">
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int T;
+    cin &gt;&gt; T;
+    while(T--){
+        int N;
+        cin &gt;&gt; N;
+        vector&lt;int&gt; arr(2*N);
+        for(int i=0;i&lt;2*N;i++) cin &gt;&gt; arr[i];
+
+        vector&lt;int&gt; degree(N+1,0);
+        stack&lt;int&gt; st;
+
+        for(int x : arr){
+            if(!st.empty() &amp;&amp; st.top() == x){
+                st.pop(); // csúcs vége
+            } else {
+                if(!st.empty()){
+                    degree[st.top()]++; // szülőnek nő a gyerekszám
+                    degree[x]++; // gyereknek nő a szülőhöz kapcsolódó él
+                }
+                st.push(x);
+            }
+        }
+
+        int ans = *max_element(degree.begin()+1, degree.end());
+        cout &lt;&lt; ans &lt;&lt; "\n";
+    }
+
+    return 0;
+}
+</code></pre>
+
+</body>
+</html>
